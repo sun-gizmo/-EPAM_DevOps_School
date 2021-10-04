@@ -1,0 +1,33 @@
+Home work Topic2 Part2 Users and Groups
+
+2.2.1. Try to login as root with su
+2.2.2. Set password to root with sudo
+2.2.3. Try to login as root with sudo
+2.2.4. Add a file which will be placed into a user's home directory automatically after user's creation
+2.2.5. Create a new user with home directory
+2.2.6. Add sudo to the new user
+#########################################################
+
+#2.2.1
+[user@localhost ~]$ su root
+Пароль:
+
+#2.2.2
+[root@localhost user]# sudo passwd root
+Изменяется пароль пользователя root.
+Новый пароль : 
+Повторите ввод нового пароля : 
+passwd: все данные аутентификации успешно обновлены.
+
+#2.2.3
+[user@localhost ~]$ sudo -i
+[sudo] пароль для user: 
+
+#2.2.5
+[root@localhost ~]# sudo adduser -m -d /home/alisa alisa
+Создание почтового ящика: Файл существует
+
+#2.2.6
+[user@localhost ~]$ sudo useradd -m -G root boris
+
+

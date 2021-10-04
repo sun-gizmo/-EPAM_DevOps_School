@@ -1,12 +1,12 @@
-#Home work Topic2 LINUX FILE SYSTEM and PERMISSIONS
+#Home work Topic2 Part1 LINUX FILE SYSTEM and PERMISSIONS
 
-# 2.1. Create new volume in VirtualBox, attach it to VM
-# 2.2. Create two partitions. One of it should be formatted in ext3, second in BTRFS
-# 2.3. Mount into your system as /homework/ext & /homework/btrfs
-# 2.4. They should be mounted after reboot
+# 2.1.1 Create new volume in VirtualBox, attach it to VM
+# 2.1.2. Create two partitions. One of it should be formatted in ext3, second in BTRFS
+# 2.1.3. Mount into your system as /homework/ext & /homework/btrfs
+# 2.1.4. They should be mounted after reboot
 #########################################################
 
-#2.2 
+#2.1.2 
 #просмотр списка устройств с помощью команды lsblk
 [user@localhost hgfs]$ lsblk
 NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
@@ -236,7 +236,7 @@ Disk Flags:
  1     0,00B   39,7GB  39,7GB  xfs
 
 
-#2.3
+#2.1.3 - 2.1.4 without reboot
 #монтирование созданных разделов в нужные директории
 [user@localhost hgfs]$ sudo mount /dev/sdc1 /homework/ext/
 [user@localhost hgfs]$ sudo mount /dev/sdc2 /homework/btrfs/
