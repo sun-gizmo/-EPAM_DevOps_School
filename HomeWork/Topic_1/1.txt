@@ -1,0 +1,99 @@
+#Home work Topic1 Part1 Basic command line skills
+
+# 1.1.1 Войти под своим логинам/паролем
+# 1.1.2 Создать каталог для упражнений и перейти в него
+# 1.1.3 Создать файлы f1 и f2, а также директорию dir1 и в ней файл dir2
+# 1.1.4 Скопировать dir1 в dir2 со всеми файлами
+# 1.1.5 Удалить dir1
+# 1.1.6 Скопировать файл /etc/services в свой каталог
+# 1.1.7 Вывести все строки, содержащие HTTP
+# 1.1.8 Посчитать количество строчек в нем
+# 1.1.9 Исследовать команды more, less, tail, head на файле services
+# 1.1.10 Исследовать команды cal, bc
+# 1.1.11 Выяснить дату православной пасхи на 2051 год. 
+#########################################################
+
+
+# 1.1.1
+[root@localhost ~]# su - user
+Последний вход в систему:Пн окт  4 19:28:22 MSK 2021на pts/0
+
+# 1.1.2
+[user@localhost ~]$ mkdir ~/Topic_1
+[user@localhost ~]$ cd ~/Topic_1/
+
+# 1.1.3
+[user@localhost Topic_1]$ touch f{1..2}
+[user@localhost Topic_1]$ mkdir -p dir1/dir2
+[user@localhost Topic_1]$ ls
+dir1  f1  f2
+
+# 1.1.4
+[user@localhost Topic_1]$ mv f1 f2 ~/Topic_1/dir1
+[user@localhost Topic_1]$ cp dir1 ~/Topic_1/dir1/dir2
+cp: пропускается каталог «dir1»
+[user@localhost Topic_1]$ cp -r dir1 ~/Topic_1/dir1/dir2
+cp: невозможно скопировать каталог «dir1» в самого себя, «/home/user/Topic_1/dir1/dir2/dir1»
+[user@localhost Topic_1]$ tree
+.
+└── dir1
+    ├── dir2
+    ├── f1
+    └── f2
+
+# 1.1.5
+[user@localhost dir1]$ rm -R ~/Topic_1/dir1/
+
+# 1.1.6 
+[user@localhost Topic_1]$ cp /etc/services ~/Topic_1/
+[user@localhost Topic_1]$ ls -la | grep services 
+-rw-r--r--.  1 user user 670293 окт  6 19:01 services
+
+# 1.1.7
+[user@localhost Topic_1]$ man less
+[user@localhost Topic_1]$ less services | grep HTTP
+http            80/tcp          www www-http    # WorldWideWeb HTTP
+http-rpc-epmap  593/tcp                 # HTTP RPC Ep Map
+http-rpc-epmap  593/udp                 # HTTP RPC Ep Map
+multiling-http  777/tcp                 # Multiling HTTP
+multiling-http  777/udp                 # Multiling HTTP
+.....
+commtact-https  20003/udp               # Commtact HTTPS
+tcc-http        24680/tcp               # TCC User HTTP Service
+tcc-http        24680/udp               # TCC User HTTP Service
+kopek-httphead  27504/tcp               # Kopek HTTP Head Port
+kopek-httphead  27504/udp               # Kopek HTTP Head Port
+
+# 1.1.8
+[user@localhost Topic_1]$ less services | wc
+  11176   61033  670293
+
+#1.1.9
+[user@localhost Topic_1]$ history | tail -n 20
+  594  tail services 
+  595  head services 
+  596  man head
+  597  head -n 10 services 
+  598  head -n 5 services 
+  599  tail -n 2 services 
+
+
+#1.1.9
+[user@localhost Topic_1]$ history | tail -n 12
+  611  cal
+  612  man cal
+  613  cal -j
+  614  man cal
+  615  cal -y  
+  616  bc 
+  617  man bc
+  618  bc -i
+  619  bc -q
+  620  bc -w
+  621  man bc
+  622  bc -l
+
+
+# 1.1.11
+[user@localhost Topic_1]$ ncal -ojy 2051
+05/07/2051
