@@ -1,0 +1,22 @@
+#Home work Topic1 Part2 Remote control using SSH
+
+# 	Step 							Where
+# 1.2.1 Create a new virtual machine (VM) or use existing one 	local machine
+# 1.2.2 Install SSH client (if it’s installed yet) 		local machine
+# 1.2.3 Create private and public key pair 			local machine
+# 1.2.4 Install SSH server package (if it’s installed yet)	remote server
+# 1.2.5 Create mysshfriend user with password 			remote server
+# 1.2.6 Connect to VM as mysshfriend user 			local machine
+# 1.2.7 Add public key to mysshfriend user 			remote server
+# 1.2.8 Connect to VM as mysshfriend user 			local machine
+###############################################################################
+
+
+# 1.2.1
+
+
+
+# 1.2.2
+
+
+# 1.2.3

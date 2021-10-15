@@ -1,0 +1,102 @@
+#Home work Topic3 Part1 Basic monitoring. Memory_Presentation
+
+# 3.1.1 Depending on the configuration of your system, write what is the optimal LA value for your system
+# 3.1.2 Using the stress utility, load the systems by 50%, assess the state of the system according to top
+# 3.1.3 Use the ps utility to find the processes that are using the maximum memory / CPU on Linux.
+# 3.1.4 Use the ps utility to display the process tree 
+# 3.1.5 Using lsof and kill kill all processes of the selected user
+
+#########################################################
+
+# 3.1.1
+[user@localhost HomeWork]$ nproc
+2
+[user@localhost HomeWork]$ cat /proc/cpuinfo | grep "cpu core" | wc -l
+2
+
+The optimal LA value for my dual-core LA 15 system should not exceed 1.5.
+
+
+#3.1.2
+[user@localhost Topic_3]$ stress --cpu 1 --vm-bytes 50&
+[user@localhost Topic_3]$  top | grep load
+22:59:03 up  2:03,  2 user,  load average: 0,75, 0.30, 0,19
+[user@localhost Topic_3]$  jobs
+[user@localhost Topic_3]$  fg 30
+[user@localhost Topic_3]$  ^C
+[user@localhost Topic_3]$  top | grep load
+23:01:03 up  2:03,  2 user,  load average: 0,25, 0.34, 0,23
+
+
+#3.1.3
+[user@localhost ~]$ ps -aux --sort %mem | less | tail
+user       2937  0.0  2.1 1620724 39808 ?       Sl   20:59   0:00 /usr/libexec/evolution-addressbook-factory-subprocess --factory all --bus-name org.gnome.evolution.dataserver.Subprocess.Backend.AddressBookx2860x2 --own-path /org/gnome/evolution/dataserver/Subprocess/Backend/AddressBook/2860/2
+user       2482  0.0  2.1 1219476 40368 ?       Sl   20:59   0:00 /usr/libexec/gnome-shell-calendar-server
+user       2495  0.0  2.1 1691844 40436 ?       Sl   20:59   0:00 /usr/libexec/evolution-source-registry
+user       2830  0.0  2.1 1778428 40484 ?       Sl   20:59   0:00 /usr/libexec/evolution-calendar-factory-subprocess --factory all --bus-name org.gnome.evolution.dataserver.Subprocess.Backend.Calendarx2740x2 --own-path /org/gnome/evolution/dataserver/Subprocess/Backend/Calendar/2740/2
+user       2740  0.0  2.2 1359736 42196 ?       Sl   20:59   0:00 /usr/libexec/evolution-calendar-factory
+user       2741  0.0  2.6 1412060 49360 ?       Sl   20:59   0:00 /usr/libexec/evolution/evolution-alarm-notify
+user       3606  0.3  3.0 772544 56120 ?        Sl   21:19   0:20 /usr/bin/gedit --gapplication-service
+root       1887  1.0  3.6 359848 67980 tty1     Ssl+ 20:58   1:20 /usr/bin/X :0 -background none -noreset -audit 4 -verbose -auth /run/gdm/auth-for-gdm-J7OW5O/database -seat seat0 -nolisten tcp vt1
+user       2717  0.0  4.3 1314260 81720 ?       Sl   20:59   0:02 /usr/bin/gnome-software --gapplication-service
+user       2423  2.3 10.8 3512096 201268 ?      Sl   20:59   3:05 /usr/bin/gnome-shell
+
+#3.1.4
+[user@localhost ~]$ ps -auf | less | head
+USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+user       5856  0.0  0.1 118932  3288 pts/2    Ss+  22:45   0:00 -bash
+user       5812  0.0  0.1 118932  3448 pts/1    Ss+  22:45   0:00 -bash
+user       2999  0.0  0.1 119056  3696 pts/0    Ss   20:59   0:00 bash
+user       3360  0.0  0.0 110408   956 pts/0    T    21:08   0:00  \_ less
+user       3368  0.0  0.0 110408   956 pts/0    T    21:08   0:00  \_ less
+user       3386  0.0  0.0 110408   960 pts/0    T    21:09   0:00  \_ less
+user       3514  0.0  0.1 164308  2504 pts/0    T    21:12   0:02  \_ top
+user       3723  0.0  0.0   7312   428 pts/0    T    21:22   0:00  \_ stress --cpu 1 --vm-bytes 50
+user       3726  1.9  0.0   7312   100 pts/0    T    21:22   2:09  |   \_ stress --cpu 1 --vm-bytes 50
+
+
+#3.1.5
+[user@localhost ~]$ su bob
+Пароль: 
+[bob@localhost user]$ top &
+[1] 6751
+[1]+  Stopped                 top
+
+[bob@localhost user]$ su user
+Пароль: 
+[user@localhost ~]$ lsof -u bob
+COMMAND  PID USER   FD      TYPE DEVICE SIZE/OFF NODE NAME
+bash    6586  bob  cwd   unknown                      /proc/6586/cwd (readlink: Permission denied)
+bash    6586  bob  rtd   unknown                      /proc/6586/root (readlink: Permission denied)
+bash    6586  bob  txt   unknown                      /proc/6586/exe (readlink: Permission denied)
+bash    6586  bob NOFD                                /proc/6586/fd (opendir: Permission denied)
+top     6751  bob  cwd   unknown                      /proc/6751/cwd (readlink: Permission denied)
+top     6751  bob  rtd   unknown                      /proc/6751/root (readlink: Permission denied)
+top     6751  bob  txt   unknown                      /proc/6751/exe (readlink: Permission denied)
+top     6751  bob NOFD                                /proc/6751/fd (opendir: Permission denied)
+[user@localhost ~]$ lsof -u bob | cut -d " " -f 5,6
+ 
+6586 
+6586 
+6586 
+6586 
+ 6751
+ 6751
+ 6751
+ 6751
+[user@localhost ~]$ sudo kill-9 $ (lsof -u bob | cut -d " " -f 5,6)
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
